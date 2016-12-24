@@ -24,6 +24,8 @@
 
 - name: template in config
   template: src={{ item.f }}.j2 dest=/{{ item.f }} mode={{ item.m }}
-  with_items: supervisor_files
+  with_items: "{{ supervisor_files }}"
+
+- shell: systemctl enable supervisor
 
 - service: name=supervisor state=started enabled=yes
